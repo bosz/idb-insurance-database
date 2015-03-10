@@ -1,0 +1,1 @@
+<h1>congrats, the data has been submitted into the database successfully</h1>

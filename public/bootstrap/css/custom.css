@@ -1,0 +1,222 @@
+table{
+	font-family: 'Segoe UI';
+}
+
+body{
+	
+	font-size: 16px;
+	font-family: "Courier New", Courier, monospace;
+
+}
+
+.headding{
+	background: #4e4e4e;
+	color: black;
+}
+
+.topHeading{
+}
+
+h1{
+	font-size: 35px;
+	letter-spacing: 8px;
+
+}
+
+h1 small{
+	font-weight: bold;
+}
+
+.menuOption{
+	background: #1a101e;
+	line-height: 01em;
+	float: left;
+
+}.menuOption ul{
+	float: right;
+	background: #1a1c1e;
+	font-size: 20px;
+	margin-top: 3px;
+	margin-bottom: 3px;
+}
+
+
+
+footer{
+	
+}
+
+.bbo-dy{
+	background: rgb(255,255,255); /* Old browsers */
+	background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(229,229,229,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(229,229,229,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%); /* IE10+ */
+	background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */
+	font-family: tahoma;
+}
+
+.bbody{
+background: ;
+}
+
+.shortInfo > div{
+	font-size: 17px;
+}
+
+
+.sidebar{
+	padding-top: 5px;
+	text-align: left;
+	background: #E6E6E6;
+	font-size: 18px;
+	letter-spacing: 2px;
+	border-right: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	border-bottom-right-radius: 10px;
+}
+
+.sidebar ul{
+	padding-left: 0px;
+}
+
+.sidebar ul h2{
+	color: white;
+	text-align: center;
+}
+
+.sidebar ul span li{
+	line-height: 2em;
+	color: #00008B;
+}
+
+.sidebar ul span li{
+	margin-left: 0.5em;
+	padding-left: 6px;
+}
+
+
+.sidebar ul h3{
+	font-style: italic;
+	font-size: 14px;
+	margin: 0 0 0 5;
+	color: #000;
+}
+
+.sidebar ul h3:hover{
+	color: #0df;
+}
+
+ .sidebar ul span a li:hover, .sidebar ul span a:hover{
+	line-height: 2em;
+	background: #fff;
+	text-decoration: none;
+	cursor: pointer;
+	color: #000;
+}
+
+/* ACCOUNTS */
+.addFormDiv{
+	line-height: 2em;
+	border:1px solid #ddd;
+	border-radius: 10px;
+	background: white;
+	margin: 20 20 20 20px;
+	height: fixed;
+	text-align: center;
+}
+
+
+.addFormDiv input{
+	width: 300px;
+	background: transparent;
+	border: none;
+	border-bottom: 1px solid #000;
+	border-radius: 10px;
+	padding: 0 0 0 10;
+	line-height: 2em;
+	text-align: center;
+	margin-top: 1em;
+	letter-spacing: 4px;
+	color: grey;
+}
+
+.addFormDiv input:focus{
+/*	letter-spacing: 2px;
+*/	color: black;
+	font-weight: bold;
+/*	font-size: 20px;
+*/}
+
+
+.addFormDiv form select{
+	width: 200px;
+	background: #adedea;
+	border-radius: 4 0 8 0;
+	border: none;
+}
+
+.addFormDiv form select option{
+	border:none;
+	background: #edefea
+}
+
+
+
+
+.submitt{
+	border-radius: 10px 0 10px 0;
+	background-color:  #49fa6e;
+	border: none;
+ }
+/**/
+
+.flush{
+	clear: both;
+}
+/*custom changes*/
+
+/**/
+
+.userInfo{
+	font-size: 25px;
+	position: absolute;
+	top: 1em;
+}
+
+.userInfo > a {
+	color: red;
+}
+
+.userInfo > a:hover{
+	color: green;
+	text-decoration: none;
+}
+
+.userInfo > span:first-of-type{ /*the username*/
+	
+}
+
+.userInfo > span:first-of-type > span{ /*welcome string*/
+	color: tan;
+}
+
+
+.userInfo > span:last-of-type{ /*the other, ie the id*/
+
+}
+
+.lastError{
+	list-style: none;
+	text-align: center;
+	float: middle;
+	font-weight: bold;
+}
+
+.lastError li{
+	color: red;
+	display: block;
+	margin
+}

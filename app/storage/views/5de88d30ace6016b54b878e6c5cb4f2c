@@ -3,7 +3,7 @@
 
 <head>
   <title> Idb Car Management :: Add Car</title>
-  @include('general/head')
+  <?php echo $__env->make('general/head', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 </head>
 
 <body>
@@ -15,12 +15,12 @@
     </div><!--close welcome-->
       <div id="menu_items">
       <ul id="menu">
-        <li><a href="{{URL::route('welcome')}}">Home</a></li>
-        <li class="current" ><a href="{{URL::route('homeCar')}}">Cars</a></li>
-        <li><a href="{{URL::route('homeOwners')}}">Owners</a></li>
-        <li><a href="{{URL::route('homeAccidents')}}">Accidents</a></li>
-        <li><a href="{{URL::route('homeReports')}}">Reports</a></li>
-        <li><a href="{{URL::route('homeAccounts')}}">Accounts</a></li>
+        <li><a href="<?php echo URL::route('welcome'); ?>">Home</a></li>
+        <li class="current" ><a href="<?php echo URL::route('homeCar'); ?>">Cars</a></li>
+        <li><a href="<?php echo URL::route('homeOwners'); ?>">Owners</a></li>
+        <li><a href="<?php echo URL::route('homeAccidents'); ?>">Accidents</a></li>
+        <li><a href="<?php echo URL::route('homeReports'); ?>">Reports</a></li>
+        <li><a href="<?php echo URL::route('homeAccounts'); ?>">Accounts</a></li>
       </ul>
       </div><!--close menu-->
     </div><!--close menubar-->  
@@ -30,15 +30,15 @@
     <div id="banner_image">
       <div id="slider-wrapper">        
           <div id="slider" class="nivoSlider">
-            <img src="{{ asset('images/home_1.jpg') }}" alt="" />
-            <img src="{{ asset('images/home_2.jpg') }}" alt="" />
-            <img src="{{ asset('images/home_1.jpg') }}" alt="" />
-            <img src="{{ asset('images/home_2.jpg') }}" alt="" />
+            <img src="<?php echo asset('images/home_1.jpg'); ?>" alt="" />
+            <img src="<?php echo asset('images/home_2.jpg'); ?>" alt="" />
+            <img src="<?php echo asset('images/home_1.jpg'); ?>" alt="" />
+            <img src="<?php echo asset('images/home_2.jpg'); ?>" alt="" />
       </div><!--close slider-->
     </div><!--close slider_wrapper-->
     </div><!--close banner_image--> 
 
-    @include('general/sideBar')   
+    <?php echo $__env->make('general/sideBar', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>   
    
     <div id="content">
         <div class="content_item">
@@ -47,30 +47,35 @@
         
         <p style="display:inline;" class="returned-with"> 
             
-          @if(Session::has('success'))<ul class="list-group" style="color: green;"><li class="list-group-item list-group-success">{{ Session::get('success'); }} </li></ul>@endif
-            
-          @if(Session::has('error'))<ul class="list-group" style="color: red;"><li class="list-group-item list-group-danger">{{ Session::get('error'); }} </li></ul>@endif
-            
-          @if(Session::has('info'))<ul class="list-group" style="color: blue;"><li class="list-group-item list-group-info">{{ Session::get('info'); }} </li></ul>@endif
-
-          @if ($errors->any())<ul class="lastError">{{ implode('', $errors->all('<li class="error">:message</li>')) }}</ul>@endif
-          
+          <ul>
+            <?php if(Session::has('success')): ?>
+            <li style="color: green"><?php echo Session::get('success');; ?></li>
+            <?php endif; ?>
+            <?php if(Session::has('error')): ?>
+            <li style="color: red"><?php echo Session::get('error');; ?></li>
+            <?php endif; ?>
+            <?php if(Session::has('info')): ?>
+            <li style="color: blue"><?php echo Session::get('info');; ?></li>
+            <?php endif; ?>
+          </ul>
         </p>
 
         <center><div id="wrapper">
                 <h3><em>Add New Car</em></h3>
-                {{ Form::open(array('route' => 'cars.store')) }}
+                <?php echo Form::open(array('route' => 'addCar')); ?>
+
                     <input type="text" name="regno" placeholder="Car Registration Number" ><br>
                     <input type="text" name="model" placeholder="car model" ><br>
                     <input type="number" name="year" placeholder="year of purchase"><br><br>
                     <button type="submit" name="createUserSubmit" onclick="return validateInputs()"
                    value="save" class="submitt">Add Car</button>
-                {{ Form::close() }}
+                <?php echo Form::close(); ?>
+
         </div>   </center>         
     </div><!--close content_item-->
       </div><!--close content-->   
 
-  @include('general/footer')  
+  <?php echo $__env->make('general/footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>  
 
   </div><!--close site_content--> 
   

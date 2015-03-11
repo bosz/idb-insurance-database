@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 
 <head>
-  <title> Idb Driver Management :: Add New Driver</title>
+  <title> Idb Accident Management :: Record New Accident></title>
   @include('general/head')
 </head>
 
@@ -17,8 +17,8 @@
       <ul id="menu">
         <li><a href="{{URL::route('welcome')}}">Home</a></li>
         <li><a href="{{URL::route('homeCar')}}">Cars</a></li>
-        <li class="current" ><a href="{{URL::route('homeOwners')}}">Owners</a></li>
-        <li><a href="{{URL::route('homeAccidents')}}">Accidents</a></li>
+        <li><a href="{{URL::route('homeOwners')}}">Owners</a></li>
+        <li class="current" ><a href="{{URL::route('homeAccidents')}}">Accidents</a></li>
         <li><a href="{{URL::route('homeReports')}}">Reports</a></li>
         <li><a href="{{URL::route('homeAccounts')}}">Accounts</a></li>
       </ul>
@@ -42,43 +42,49 @@
    
     <div id="content">
         <div class="content_item">
-      <h1 class="down_title">Driver Management )-(o Add New Driver </h1> 
+      <h1 class="down_title">Accident Management )-(o New Accident </h1> 
         <em>In this section of idb, you get to input information about cars you insure</em> 
         
         <p style="display:inline;" class="returned-with"> 
             
           <ul>
             @if(Session::has('success'))
-            <li style="color: green">{{ Session::get('success'); }}</li>
+            <li class="error">{{ Session::get('success'); }}</li>
             @endif
             @if(Session::has('error'))
-            <li style="color: red">{{ Session::get('error'); }}</li>
+            <li class="success">{{ Session::get('error'); }}</li>
             @endif
             @if(Session::has('info'))
-            <li style="color: blue">{{ Session::get('info'); }}</li>
+            <li class="info">{{ Session::get('info'); }}</li>
             @endif
           </ul>
         </p>
 
         <center><div id="wrapper">
-                <h3><em>Add New Car Owner</em></h3>
-                 {{ Form::open(array('action' => 'ownersController@action_addNewOwner')) }} <br>
-            {{ Form::text('driver_id', '', array('class' => 'form-control','placeholder' => 'driver\'s id')) }}<br>
-            {{ Form::text('name', '', array('class' => 'form-control','placeholder' => 'driver\'s name')) }}<br>
-            {{ Form::text('address', '', array('class' => 'form-control','placeholder' => 'driver\'s address')) }}<br>
-             {{Form::select('gender',array('m'=>'male','f'=>'female'))}}<br>
-            {{ Form::text('phone_number', '', array('class' => 'form-control','placeholder' => 'phone number')) }}<br>
-            <!--<p>{{ Form::text('date_of_birth', '', array('class' => 'form-control','placeholder' => 'date of birth','type' => 'date')) }}</p>-->
-            <input type="date" class="form-control" id="datepicker" placeholder='date of birth' name='date_of_birth'><br>
-            <input type="text" name="regno" placeholder="Car Registration Number" list="regnoList"/><br>
-            <datalist id="regnoList">
-              @foreach($regnoList as $reg)
-              <option value="{{$reg->regno}}"> {{ $reg->regno }} </option>
-              @endforeach
-            </datalist> <br>
-            <button type="submit" name="createUserSubmit" onclick="return validateInputs()"
-          value="save" class="submitt">Add Driver</button>
-      {{ Form::close() }}
+          <h3><em>Record New Accident </em></h3>
+          {{ Form::open(array('route' => 'recordAccident')) }}
+
+
+              <input type="text" name="regno" placeholder="Car Registration Number" list="regnoList"/><br>
+              <datalist id="regnoList">
+                @foreach($regnoList as $reg)
+                <option value="{{$reg->regno}}"> {{ $reg->regno }} </option>
+                @endforeach
+              </datalist>
+
+              <input type="text" name="driver_id" placeholder="Driver's Id" list="driver_idList" ><br>
+              <datalist id="driver_idList">
+                @foreach($driver_idList as $driver)
+                <option value="{{$driver->driver_id}}"> {{ $driver->name }} </option>
+                @endforeach
+              </datalist>
+
+              <input type="date" name="date" placeholder="Date of Accident"><br><br>
+              <input type="number" name="damage_amount" placeholder="Damage Amount"><br><br>
+              <input type="text" name="location" placeholder="Location of accident"><br><br>
+              <button type="submit" name="createUserSubmit" onclick="return validateInputs()"
+             value="save" class="submitt">Record</button>
+          {{ Form::close() }}
         </div>   </center>         
     </div><!--close content_item-->
       </div><!--close content-->   

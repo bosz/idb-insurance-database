@@ -39,7 +39,7 @@ $(document).ready(function() {
 				only the filter feature is left enabled (which is enabled by default).</p>
 			</div>
 
-			<table id="example" class="display" cellspacing="0" width="100%">
+			<table id="examle" class="display" cellspacing="0" width="100%">
 				<thead>
 					<tr>
 						<th>Name</th>

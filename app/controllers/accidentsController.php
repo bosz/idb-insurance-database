@@ -3,7 +3,6 @@
 	class accidentsController extends BaseController{
 
 		public function action_index(){
-
 			$regno = Cars::query()->get(array('regno'));
 
 			$driver = Drivers::query()->get(array('name', 'driver_id'));
@@ -16,6 +15,17 @@
 			->with('driver_idList', $driver)
 			->with('accidents', $accidents)
 			->with('participants', $participants);
+		}
+
+		public function action_recordAccidentDisplay(){
+			$regno = Cars::query()->get(array('regno'));
+
+			$driver = Drivers::query()->get(array('name', 'driver_id'));
+
+
+			return View::make('accidents.add')
+			->with('regnoList', $regno)
+			->with('driver_idList', $driver);
 		}
 
 		public function action_recordAccidents(){
@@ -63,6 +73,21 @@
            ->withErrors($validation)
            ->with('message', 'Some fields are incomplete.');
 
+		}
+
+		public function action_addParticipantForm(){
+			$regno = Cars::query()->get(array('regno'));
+
+			$driver = Drivers::query()->get(array('name', 'driver_id'));
+
+			$accidents = Accidents::all();
+			$participants = Participants::all();
+
+			return View::make('accidents.participate')
+			->with('regnoList', $regno)
+			->with('driver_idList', $driver)
+			->with('accidents', $accidents)
+			->with('participants', $participants);
 		}
 
 		public function action_addParticipant(){

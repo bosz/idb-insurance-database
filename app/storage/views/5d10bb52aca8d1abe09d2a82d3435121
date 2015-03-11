@@ -1,21 +1,21 @@
 <div class="sidebar_container">       
   <div class="sidebar">
     <div class="sidebar_item">
-      @if ( Auth::check() )
+      <?php if( Auth::check() ): ?>
       <div class="userInfo">
-        <h2><span><span> )-|>o &nbsp;&nbsp;&nbsp;&nbsp; </strong>{{ Auth::user()->username }}</strong></h2>
-        <center><a href="{{URL::route('logout')}}">logout</a></center>
+        <h2><span><span> )-|>o &nbsp;&nbsp;&nbsp;&nbsp; </strong><?php echo Auth::user()->username; ?></strong></h2>
+        <center><a href="<?php echo URL::route('logout'); ?>">logout</a></center>
       </div>
-      @else
+      <?php else: ?>
       <h2>Please Login </h2>
       <form  class="form-inline login-form" role="form" 
-      action="{{URL::route('login')}}" method="post"
+      action="<?php echo URL::route('login'); ?>" method="post"
       style="position: relative; top: 25px;" name="loginForm" >
           <input type="text" class="form-control" id="username" placeholder="username" name="username">
           <input type="password" class="form-control" id="password" placeholder="password" name="password">
         <button type="submit" name="loginSubmitBtn" class="btn btn-primary">Sign in</button>
       </form>
-      @endif
+      <?php endif; ?>
       </p>
     </div><!--close sidebar_item--> 
   </div><!--close sidebar-->          

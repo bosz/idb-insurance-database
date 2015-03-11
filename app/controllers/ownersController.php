@@ -3,21 +3,30 @@
 	class ownersController extends BaseController{
 
 		public function action_index(){
+			$carsOwned = $this->generateAllOwnedCars();
 
 			$driver = Drivers::all();
 			$own = Owns::all();
 
-			$driverOnly = Drivers::query()->get(array('name', 'driver_id'));
-			$regnoOnly = Cars::query()->get(array('regno'));
 
 			return View::make('owners.home')
-			->with('regnoList', $regnoOnly)
-			->with('driver_idList', $driverOnly)
 			->with('drivers', $driver)
-			->with('owns', $own);;
+			->with('owns', $own);
 		}
 /*-----------------------------------------------------------------------------------ADDING OWNERS----------------------------------------------------*/
 		
+		public function action_linkDriverToCarDisplay(){
+			$carsOwned = $this->generateAllOwnedCars();
+
+
+			$driverOnly = Drivers::query()->get(array('name', 'driver_id'));
+			$regnoOnly = Cars::query()->whereNotIn('regno', $carsOwned)->get(array('regno'));
+
+			return View::make('owners.link')
+			->with('regnoList', $regnoOnly)
+			->with('driver_idList', $driverOnly);
+		}
+
 		public function action_linkDriverToCar(){
 			$verification = Input::all();
 			$rules=array(
@@ -71,6 +80,18 @@
 		public function action_canceledEdit(){
 			return Redirect::route('homeOwners')
 				->with('info', 'Insertion of driver canceled');
+		}
+
+		public function action_addOwnerDisplay(){
+			$carsOwned = $this->generateAllOwnedCars();
+
+
+			$driverOnly = Drivers::query()->get(array('name', 'driver_id'));
+			$regnoOnly = Cars::query()->whereNotIn('regno', $carsOwned)->get(array('regno'));
+
+			return View::make('owners.add')
+			->with('regnoList', $regnoOnly)
+			->with('driver_idList', $driverOnly);
 		}
 
 		public function action_successfullyAddedOwnerpost(){
@@ -132,12 +153,12 @@
 
 		public function action_deleteOwner($driver_id){
 			
-			$driver = Drivers::where('driver_id', '=', $driver_id)
-			->delete();
+				$driver = Drivers::where('driver_id', '=', $driver_id)
+				->delete();
 
-			return Redirect::route('homeOwners')
-				->with('success', 'Driver ' 
-					. $driver_id . " deleted succesfully");
+				return Redirect::route('homeOwners')
+					->with('success', 'Driver ' 
+						. $driver_id . " deleted succesfully");
 		
 		}
 
@@ -157,6 +178,16 @@
 	    	return Redirect::route('homeOwners')
 				->with('success', 'Driver ' . Input::get('driver_id') . " info succesfully updated");
 			
+	    }
+
+	    private function generateAllOwnedCars(){
+	    	$ownQ = Owns::query()->get(array('regno'));
+	    	$carsOwned = array(0);
+	    	foreach ($ownQ as $key => $value) {
+/*	    		echo $value->regno . " < br > ";
+*/	    		$carsOwned[] = $value->regno;
+	    	}
+	    	return $carsOwned;
 	    }
 
 

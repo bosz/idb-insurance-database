@@ -1,142 +1,102 @@
-<html>
-	<head>
-		<link rel="stylesheet" type="text/css" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
-		<link rel="stylesheet" type="text/css" href="{{ asset('bootstrap/css/custom.css')}}">
-		<link rel="stylesheet" href="malihu/jquery.mCustomScrollbar.css" />
-	    <link rel="stylesheet" href="colorbox/colorbox.css" />
-		<script src="bootstrap/jquery/jquery-2.1.1.min.js"></script>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 
-		<link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
-		<link rel="stylesheet" type="text/css" href="css/shCore.css">
-		<link rel="stylesheet" type="text/css" href="css/demo.css">
-		<style type="text/css" class="init">
-		</style>
-		<script type="text/javascript" language="javascript" src="js/jquery.dataTables.js"></script>
-		<script type="text/javascript" language="javascript" src="js/shCore.js"></script>
-		<script type="text/javascript" language="javascript" src="js/demo.js"></script>
+<head>
+  <title> Idb Reports Module :: Home</title>
+  @include('general/head')
+  <script type="text/javascript">
+  $(document).ready(function() 
+  	$('#filteringTable').dataTable( {
+  		"paging":   false,
+		"ordering": false,
+		"info":     false
+	} );
+  } );
+  </script>
+</head>
 
-		<script type="text/javascript" language="javascript" class="init">
-			$(document).ready(function() {
-				$('#example').dataTable( {
-					"paging":   false,
-					"ordering": false,
-					"info":     false
-				} );
-			} );
-		</script>
+<body>
+  <div id="main">
 
-	</head>
+  <div id="menubar">
+    <div id="welcome">
+      <h1><a href="#">Welcome To IDb</a></h1>
+    </div><!--close welcome-->
+      <div id="menu_items">
+      <ul id="menu">
+        <li><a href="{{URL::route('welcome')}}">Home</a></li>
+        <li><a href="{{URL::route('homeCar')}}">Cars</a></li>
+        <li><a href="{{URL::route('homeOwners')}}">Owners</a></li>
+        <li><a href="{{URL::route('homeAccidents')}}">Accidents</a></li>
+        <li class="current" ><a href="{{URL::route('homeReports')}}">Reports</a></li>
+        <li><a href="{{URL::route('homeAccounts')}}">Accounts</a></li>
+      </ul>
+      </div><!--close menu-->
+    </div><!--close menubar-->  
+    
+  <div id="site_content">   
 
-	<style type="text/css">
-	
-		.delEditOptions button:first-of-type{
-			border-radius: 0 10 10 0;
-			background-color:  #49fa6e;
-			margin-right: 6px;
-		}	
+    <div id="banner_image">
+      <div id="slider-wrapper">        
+          <div id="slider" class="nivoSlider">
+            <img src="{{ asset('images/home_1.jpg') }}" alt="" />
+            <img src="{{ asset('images/home_2.jpg') }}" alt="" />
+            <img src="{{ asset('images/home_3.jpg') }}" alt="" />
+            <img src="{{ asset('images/home_4.jpg') }}" alt="" />
+      </div><!--close slider-->
+    </div><!--close slider_wrapper-->
+    </div><!--close banner_image--> 
 
-		.delEditOptions button:last-of-type{
-			border-radius: 10 0 0 10;
-			margin-left: 6px;
-			background: red;
-		}
+    @include('general/sideBar')   
+   
+    <div id="content">
+        <div class="content_item"><br>
+       <center><h1 class="down_title">
+       	Reports Module )-(o Home @if($type) {{ $type }} @endif</h1> 
+       <em>Get to query out suitable information to help management make strategic decision</em></center>
+        
+        <p style="display:inline;" class="returned-with"> 
+            
+          @if(Session::has('success'))<ul class="list-group" style="color: green;"><li class="list-group-item list-group-success">{{ Session::get('success'); }} </li></ul>@endif
+            
+          @if(Session::has('error'))<ul class="list-group" style="color: red;"><li class="list-group-item list-group-danger">{{ Session::get('error'); }} </li></ul>@endif
+            
+          @if(Session::has('info'))<ul class="list-group" style="color: blue;"><li class="list-group-item list-group-info">{{ Session::get('info'); }} </li></ul>@endif
 
-		.delEditOptions{
-			float: left;
-			text-align: left;
-		}
-		.delEditOptions button:last-of-type, 
-		.delEditOptions button:first-of-type{
-			line-height: 30px;
-			border: none;
-			font-size: 20px;
-			font-weight: bold;
-			letter-spacing: 2px;
-			display: inline;
-			color: #fff;
-		}
+          @if ($errors->any())<ul class="lastError">{{ implode('', $errors->all('<li class="error">:message</li>')) }}</ul>@endif
+          
+        </p><br>
+        <div class="sub_operations">
+        	<a href='{{ url('reports/Cars') }}'>Cars</a>&nbsp&nbsp&nbsp&nbsp
+			<a href='{{ url('reports/Drivers') }}'>Drivers</a>&nbsp&nbsp&nbsp&nbsp
+			<a href='{{ url('reports/Accidents') }}'>Accidents</a>&nbsp&nbsp&nbsp&nbsp
+			<a href='{{ url('reports/Owners') }}'>Vehicle Owners</a>&nbsp&nbsp&nbsp&nbsp
 
-		.delEditOptions button:last-of-type:hover, 
-		.delEditOptions button:first-of-type:hover{
-			opacity: 0.8;
-			color: #ffa;
-			font-weight: bolder;
-		}
+        </div><br>
+        <div class="search">
+        	 {{ Form::open(array('route' => array('sumDriversCarsParticipation'))) }}
+             	<input type="text" name="driver_id" placeholder="Date to filter driver's involvement in accidents">
+             	<button type="submit" >Search</button>
+             {{ Form::close() }}
+        </div>
+        <div>
+          {{ $reportTable }}
 
-	
 
-	
-	</style>
+          <h5>Work goes here</h5>
+        </div>            
+    </div><!--close content_item-->
+      </div><!--close content-->   
 
-	<body class="container-fluid">
-		<div class="topHeading">
-			@include('general/header')		
-			<div class="row menuOption">
-				<div class="col-md-3 hidden-sm hidden-xs"></div>
-				<div class="col-md-9">
-					<ul class="nav nav-pills nav-justified">
-					  <li><a href="{{URL::route('welcome')}}">Home</a></li>
-					  <li><a href="{{URL::route('homeCar')}}">Cars</a></li>
-					  <li><a href="{{URL::route('homeOwners')}}">Owners</a></li>
-					  <li><a href="{{URL::route('homeAccidents')}}">Accidents</a></li>
-					  <li  class="active"  ><a href="{{URL::route('homeReports')}}">Reports</a></li>
-					  <li><a href="{{URL::route('homeAccounts')}}">Accounts</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
+  @include('general/footer')  
 
-<!-- 		<br><br><br><br><br><br><br>
- -->
-
- 	<div class="flush"></div>
-		<!-- this is the body of the whole idb -->		
-		<center><div class="bbody ">
-			<div class="shortInfo row"  >
-				<div class="col-md-3 col-sm-3 hidden-xs sidebar">
-					@include('general/sideBar')
-				</div>
-				<div class="col-md-9 col-sm-9" >
-					<div class="container-fluid">
-						<center>
-							<h2>Welcome To IDb, reports module :: 
-								@if($type) 
-									{{ $type }}
-									@endif</h2>
-							<p>
-								<em >Idb provides you with a very flexible interface to manage 
-									Information about you cars, drivers and accidents
-								</em>
-							</p>
-						</center>
-					</div>
-					<div>
-
-						<form class="form-inline searchForm" role="form" style="float: left;">
-						  <div class="form-group has-feedback"> 
-						    <input type="text" class="form-control" id="searchText" 
-						    placeholder="Type search string to filter table">
-						    <span class="glyphicon glyphicon-search form-control-feedback"></span>
-						  </div>
-						</form>
-						<span style="float:right; margin-right: 10px;">
-							<a href='{{ url('reports/Cars') }}'>Cars</a>&nbsp&nbsp&nbsp&nbsp
-							<a href='{{ url('reports/Drivers') }}'>Drivers</a>&nbsp&nbsp&nbsp&nbsp
-							<a href='{{ url('reports/Accidents') }}'>Accidents</a>&nbsp&nbsp&nbsp&nbsp
-							<a href='{{ url('reports/Owners') }}'>Vehicle Owners</a>&nbsp&nbsp&nbsp&nbsp
-
-							
-						</span>
-						{{ $reportTable }}
-					    <a href=""><button class="printer">Print</button></a>
-					</div>
-				</div>
-			</div>
-
-		</div></center>
-		@include('general/footer')
-		<script src="bootstrap/js/respond.js"></script>
-		
-		<script src="bootstrap/js/bootstrap.min.js"></script>
-	</body>
+  </div><!--close site_content--> 
+  
+  </div><!--close main-->
+  
+  <div id="footer">
+    Powered by <em><a href="">_ _ 3 c h 3 1 0 n _ _</a></em>
+  </div><!--close footer-->  
+  
+</body>
 </html>

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 
 <head>
-  <title> Idb Car Management :: Add Car</title>
+  <title> Idb Driver Management :: Add New Driver</title>
   @include('general/head')
 </head>
 
@@ -16,8 +16,8 @@
       <div id="menu_items">
       <ul id="menu">
         <li><a href="{{URL::route('welcome')}}">Home</a></li>
-        <li class="current" ><a href="{{URL::route('homeCar')}}">Cars</a></li>
-        <li><a href="{{URL::route('homeOwners')}}">Owners</a></li>
+        <li><a href="{{URL::route('homeCar')}}">Cars</a></li>
+        <li class="current" ><a href="{{URL::route('homeOwners')}}">Owners</a></li>
         <li><a href="{{URL::route('homeAccidents')}}">Accidents</a></li>
         <li><a href="{{URL::route('homeReports')}}">Reports</a></li>
         <li><a href="{{URL::route('homeAccounts')}}">Accounts</a></li>
@@ -42,30 +42,45 @@
    
     <div id="content">
         <div class="content_item">
-      <h1 class="down_title">Car Management )-(o Add New Car </h1> 
+      <h1 class="down_title">Driver Management )-(o Link Driver To Car </h1> 
         <em>In this section of idb, you get to input information about cars you insure</em> 
         
         <p style="display:inline;" class="returned-with"> 
             
-          @if(Session::has('success'))<ul class="list-group" style="color: green;"><li class="list-group-item list-group-success">{{ Session::get('success'); }} </li></ul>@endif
-            
-          @if(Session::has('error'))<ul class="list-group" style="color: red;"><li class="list-group-item list-group-danger">{{ Session::get('error'); }} </li></ul>@endif
-            
-          @if(Session::has('info'))<ul class="list-group" style="color: blue;"><li class="list-group-item list-group-info">{{ Session::get('info'); }} </li></ul>@endif
-
-          @if ($errors->any())<ul class="lastError">{{ implode('', $errors->all('<li class="error">:message</li>')) }}</ul>@endif
-          
+          <ul>
+            @if(Session::has('success'))
+            <li style="color: green">{{ Session::get('success'); }}</li>
+            @endif
+            @if(Session::has('error'))
+            <li style="color: red">{{ Session::get('error'); }}</li>
+            @endif
+            @if(Session::has('info'))
+            <li style="color: blue">{{ Session::get('info'); }}</li>
+            @endif
+          </ul>
         </p>
 
         <center><div id="wrapper">
-                <h3><em>Add New Car</em></h3>
-                {{ Form::open(array('route' => 'cars.store')) }}
-                    <input type="text" name="regno" placeholder="Car Registration Number" ><br>
-                    <input type="text" name="model" placeholder="car model" ><br>
-                    <input type="number" name="year" placeholder="year of purchase"><br><br>
-                    <button type="submit" name="createUserSubmit" onclick="return validateInputs()"
-                   value="save" class="submitt">Add Car</button>
-                {{ Form::close() }}
+          <h3><em>Create a Car -> Driver Link</em></h3>
+          {{ Form::open(array('route' => 'linkDriverCar')) }}
+          <input type="hidden">
+          <input type="text" name="driver_id" placeholder="Driver's Id" list="driver_idList" ><br>
+          <datalist id="driver_idList">
+            @foreach($driver_idList as $driver)
+            <option value="{{$driver->driver_id}}"> {{ $driver->name }} </option>
+            @endforeach
+          </datalist>
+
+          <input type="text" name="regno" placeholder="Car Registration Number" list="regnoList"/><br>
+          <datalist id="regnoList">
+            @foreach($regnoList as $reg)
+            <option value="{{$reg->regno}}"> {{ $reg->regno }} </option>
+            @endforeach
+          </datalist> <br>
+
+          <button type="submit" name="createUserSubmit" onclick="return validateInputs()"
+          value="save" class="submitt">Link</button>
+        {{ Form::close() }}
         </div>   </center>         
     </div><!--close content_item-->
       </div><!--close content-->   

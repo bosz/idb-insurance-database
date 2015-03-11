@@ -1,92 +1,66 @@
-<html>
-  <head>
-    <link rel="stylesheet" type="text/css" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('bootstrap/css/custom.css') }}">
-    <script src="{{ asset('bootstrap/jquery/jquery-2.1.1.min.js') }}"></script>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+  <title> Idb Car Management :: Home</title>
+  @include('general/head')
+</head>
+
+<body>
+  <div id="main">
+
+  <div id="menubar">
+    <div id="welcome">
+      <h1><a href="#">Welcome To IDb</a></h1>
+    </div><!--close welcome-->
+      <div id="menu_items">
+      <ul id="menu">
+        <li><a href="{{URL::route('welcome')}}">Home</a></li>
+        <li><a href="{{URL::route('homeCar')}}">Cars</a></li>
+        <li class="current" ><a href="{{URL::route('homeOwners')}}">Owners</a></li>
+        <li><a href="{{URL::route('homeAccidents')}}">Accidents</a></li>
+        <li><a href="{{URL::route('homeReports')}}">Reports</a></li>
+        <li><a href="{{URL::route('homeAccounts')}}">Accounts</a></li>
+      </ul>
+      </div><!--close menu-->
+    </div><!--close menubar-->  
     
-  </head>
+  <div id="site_content">   
 
-  <style type="text/css">
-  
+    <div id="banner_image">
+      <div id="slider-wrapper">        
+          <div id="slider" class="nivoSlider">
+            <img src="images/home_1.jpg" alt="" />
+            <img src="images/home_2.jpg" alt="" />
+            <img src="images/home_3.jpg" alt="" />
+            <img src="images/home_4.jpg" alt="" />
+      </div><!--close slider-->
+    </div><!--close slider_wrapper-->
+    </div><!--close banner_image--> 
 
-  
-
-  
-  </style>
-
-  <body class="container-fluid">
-    <div class="topHeading">
-      @include('general/header')    
-      <div class="row menuOption">
-        <div class="col-md-3 hidden-sm hidden-xs"></div>
-        <div class="col-md-9">
-          <ul class="nav nav-pills nav-justified">
-            <li><a href="{{URL::route('welcome')}}">Home</a></li>
-            <li><a href="{{URL::route('homeCar')}}">Cars</a></li>
-            <li class="active" ><a href="{{URL::route('homeOwners')}}">Owners</a></li>
-            <li><a href="{{URL::route('homeAccidents')}}">Accidents</a></li>
-            <li><a href="{{URL::route('homeReports')}}">Reports</a></li>
-            <li><a href="{{URL::route('homeAccounts')}}">Accounts</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-<!--    <br><br><br><br><br><br><br>
- -->
-  <div class="flush"></div>
-    <!-- this is the body of the whole idb -->    
-    <center><div class="bbody ">
-      <div class="shortInfo row"  >
-        <div class="col-md-3 col-sm-3 hidden-xs sidebar">
-          @include('general/sideBar')
-        </div>
-        <div class="col-md-9 col-sm-9" >
-          <div class="row" >
-            <center>
-              <h2>Welcome To Insurance Database (IDb)</h2>
-              <p>
-                Feel free
-              </p>
-            </center>
-          </div>
-          <p style="display:inline;">
+    @include('general/sideBar')   
+   
+    <div id="content">
+        <div class="content_item"><br>
+       <center><h1 class="down_title">Driver Management )-(o Home </h1> 
+       <em>In this section of idb, you get to input information about cars you insure</em></center>
+        
+        <p style="display:inline;" class="returned-with"> 
             
-            @if(Session::has('success'))
-              <ul class="list-group" style="color: green;">
-                <li class="list-group-item list-group-success">
-                  {{ Session::get('success'); }} 
-                </li>
-            </ul>
-            @endif
-            @if(Session::has('error'))
-              <ul class="list-group" style="color: red;">
-                <li class="list-group-item list-group-danger">
-                  {{ Session::get('error'); }} 
-                </li>
-            </ul>
-            @endif
-            @if(Session::has('info'))
-              <ul class="list-group" style="color: blue;">
-                <li class="list-group-item list-group-info">
-                  {{ Session::get('info'); }} 
-                </li>
-            </ul>
-            @endif
+          @if(Session::has('success'))<ul class="list-group" style="color: green;"><li class="list-group-item list-group-success">{{ Session::get('success'); }} </li></ul>@endif
+            
+          @if(Session::has('error'))<ul class="list-group" style="color: red;"><li class="list-group-item list-group-danger">{{ Session::get('error'); }} </li></ul>@endif
+            
+          @if(Session::has('info'))<ul class="list-group" style="color: blue;"><li class="list-group-item list-group-info">{{ Session::get('info'); }} </li></ul>@endif
 
-
-            @if ($errors->any())
-            <ul class="lastError">
-              {{ implode('', $errors->all('<li class="error">:message</li>')) }}
-            </ul>
-            @endif
+          @if ($errors->any())<ul class="lastError">{{ implode('', $errors->all('<li class="error">:message</li>')) }}</ul>@endif
           
-          </p>
-          <a href="#addOwnerForm" class="inline" > Add New Car Owner </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <a href="#linkCarToOwner" class="inline" > Link Car to Owner </a>
-
+        </p><br>
+        <div class="sub_operations"><a href="{{URL::route('addOwnersDisplay')}}" class="inline" > Add New Car Owner </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="{{URL::route('linkDriverCarDisplay')}}" class="inline" > Link Car to Owner </a></div><br>
+        <div>
           @if ($drivers->count())
-            <table class="table table-striped table-bordered table table-hover reportTable">
+            <table class="table table-striped table table-hover">
                 <thead>
                 <tr>
                     <th>Driver Id</th>
@@ -106,7 +80,14 @@
                   <td>{{ $driver->driver_id }}</td>
                   <td>{{ $driver->name }}</td>
                   <td>{{ $driver->address }}</td>
-                  <td>{{ $driver->sex }}</td>
+                  <td>@if($driver->gender == 'm' || $driver->gender = 'M')
+                        Male
+                      @elseif($driver->gender == 'f' || $driver->gender = 'F')
+                        Female
+                      @else
+                        Uknown
+                      @endif
+                  </td>
                   <td>{{ $driver->dob }}</td>
                   
                   <td>
@@ -142,66 +123,20 @@
             @else
             <strong>No drivers for far</strong>
             @endif
+          <h5>Work goes here</h5>
+        </div>            
+    </div><!--close content_item-->
+      </div><!--close content-->   
 
-        </div>
-      </div>
+  @include('general/footer')  
 
-    </div></center>
-    @include('general/footer')
-    <script src="{{ asset('bootstrap/js/respond.js') }}"></script>
-    
-    <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
-
-    <div style="display:none;">
-      <div id="addOwnerForm" class="addFormDiv">
-          <center><h3><em>Add New Car Owner</em></h3>
-        {{ Form::open(array('action' => 'ownersController@action_addNewOwner')) }} <br>
-            {{ Form::text('driver_id', '', array('class' => 'form-control','placeholder' => 'driver\'s id')) }}<br>
-            {{ Form::text('name', '', array('class' => 'form-control','placeholder' => 'driver\'s name')) }}<br>
-            {{ Form::text('address', '', array('class' => 'form-control','placeholder' => 'driver\'s address')) }}<br>
-             {{Form::select('gender',array('m'=>'male','f'=>'female'))}}<br>
-            {{ Form::text('phone_number', '', array('class' => 'form-control','placeholder' => 'phone number')) }}<br>
-            <!--<p>{{ Form::text('date_of_birth', '', array('class' => 'form-control','placeholder' => 'date of birth','type' => 'date')) }}</p>-->
-            <input type="date" class="form-control" id="datepicker" placeholder='date of birth' name='date_of_birth'><br>
-            <input type="text" name="regno" placeholder="Car Registration Number" list="regnoList"/><br>
-            <datalist id="regnoList">
-              @foreach($regnoList as $reg)
-              <option value="{{$reg->regno}}"> {{ $reg->regno }} </option>
-              @endforeach
-            </datalist> <br>
-            <button type="submit" name="createUserSubmit" onclick="return validateInputs()"
-          value="save" class="submitt">Add Driver</button>
-      {{ Form::close() }}
-
-			</center>
-      </div>
-    </div>
-
-    <div style="display:none;">
-      <div id="linkCarToOwner" class="addFormDiv">
-          <center><h3><em>Link Car Owner</em></h3>
-				{{ Form::open(array('route' => 'linkDriverCar')) }}
-					<input type="hidden">
-          <input type="text" name="driver_id" placeholder="Driver's Id" list="driver_idList" ><br>
-          <datalist id="driver_idList">
-            @foreach($driver_idList as $driver)
-            <option value="{{$driver->driver_id}}"> {{ $driver->name }} </option>
-            @endforeach
-          </datalist>
-
-          <input type="text" name="regno" placeholder="Car Registration Number" list="regnoList"/><br>
-          <datalist id="regnoList">
-            @foreach($regnoList as $reg)
-            <option value="{{$reg->regno}}"> {{ $reg->regno }} </option>
-            @endforeach
-          </datalist> <br>
-
-					<button type="submit" name="createUserSubmit" onclick="return validateInputs()"
-					value="save" class="submitt">Link</button>
-				{{ Form::close() }}
-			</center>
-      </div>
-    </div>
-
-  </body>
+  </div><!--close site_content--> 
+  
+  </div><!--close main-->
+  
+  <div id="footer">
+    Powered by <em><a href="">_ _ 3 c h 3 1 0 n _ _</a></em>
+  </div><!--close footer-->  
+  
+</body>
 </html>

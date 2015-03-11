@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+  <title> Idb Driver Management :: Add New Driver</title>
+  <?php echo $__env->make('general/head', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+</head>
+
+<body>
+  <div id="main">
+
+  <div id="menubar">
+    <div id="welcome">
+      <h1><a href="#">Welcome To IDb</a></h1>
+    </div><!--close welcome-->
+      <div id="menu_items">
+      <ul id="menu">
+        <li><a href="<?php echo URL::route('welcome'); ?>">Home</a></li>
+        <li><a href="<?php echo URL::route('homeCar'); ?>">Cars</a></li>
+        <li class="current" ><a href="<?php echo URL::route('homeOwners'); ?>">Owners</a></li>
+        <li><a href="<?php echo URL::route('homeAccidents'); ?>">Accidents</a></li>
+        <li><a href="<?php echo URL::route('homeReports'); ?>">Reports</a></li>
+        <li><a href="<?php echo URL::route('homeAccounts'); ?>">Accounts</a></li>
+      </ul>
+      </div><!--close menu-->
+    </div><!--close menubar-->  
+    
+  <div id="site_content">   
+
+    <div id="banner_image">
+      <div id="slider-wrapper">        
+          <div id="slider" class="nivoSlider">
+            <img src="<?php echo asset('images/home_1.jpg'); ?>" alt="" />
+            <img src="<?php echo asset('images/home_2.jpg'); ?>" alt="" />
+            <img src="<?php echo asset('images/home_1.jpg'); ?>" alt="" />
+            <img src="<?php echo asset('images/home_2.jpg'); ?>" alt="" />
+      </div><!--close slider-->
+    </div><!--close slider_wrapper-->
+    </div><!--close banner_image--> 
+
+    <?php echo $__env->make('general/sideBar', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>   
+   
+    <div id="content">
+        <div class="content_item">
+      <h1 class="down_title">Driver Management )-(o Add New Driver </h1> 
+        <em>In this section of idb, you get to input information about cars you insure</em> 
+        
+        <p style="display:inline;" class="returned-with"> 
+            
+          <ul>
+            <?php if(Session::has('success')): ?>
+            <li style="color: green"><?php echo Session::get('success');; ?></li>
+            <?php endif; ?>
+            <?php if(Session::has('error')): ?>
+            <li style="color: red"><?php echo Session::get('error');; ?></li>
+            <?php endif; ?>
+            <?php if(Session::has('info')): ?>
+            <li style="color: blue"><?php echo Session::get('info');; ?></li>
+            <?php endif; ?>
+          </ul>
+        </p>
+
+        <center><div id="wrapper">
+                <h3><em>Add New Car Owner</em></h3>
+                 <?php echo Form::open(array('action' => 'ownersController@action_addNewOwner')); ?> <br>
+            <?php echo Form::text('driver_id', '', array('class' => 'form-control','placeholder' => 'driver\'s id')); ?><br>
+            <?php echo Form::text('name', '', array('class' => 'form-control','placeholder' => 'driver\'s name')); ?><br>
+            <?php echo Form::text('address', '', array('class' => 'form-control','placeholder' => 'driver\'s address')); ?><br>
+             <?php echo Form::select('gender',array('m'=>'male','f'=>'female')); ?><br>
+            <?php echo Form::text('phone_number', '', array('class' => 'form-control','placeholder' => 'phone number')); ?><br>
+            <!--<p><?php echo Form::text('date_of_birth', '', array('class' => 'form-control','placeholder' => 'date of birth','type' => 'date')); ?></p>-->
+            <input type="date" class="form-control" id="datepicker" placeholder='date of birth' name='date_of_birth'><br>
+            <input type="text" name="regno" placeholder="Car Registration Number" list="regnoList"/><br>
+            <datalist id="regnoList">
+              <?php foreach($regnoList as $reg): ?>
+              <option value="<?php echo $reg->regno; ?>"> <?php echo $reg->regno; ?> </option>
+              <?php endforeach; ?>
+            </datalist> <br>
+            <button type="submit" name="createUserSubmit" onclick="return validateInputs()"
+          value="save" class="submitt">Add Driver</button>
+      <?php echo Form::close(); ?>
+
+        </div>   </center>         
+    </div><!--close content_item-->
+      </div><!--close content-->   
+
+  <?php echo $__env->make('general/footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>  
+
+  </div><!--close site_content--> 
+  
+  </div><!--close main-->
+  
+  <div id="footer">
+    Powered by <em><a href="">_ _ 3 c h 3 1 0 n _ _</a></em>
+  </div><!--close footer-->  
+  
+</body>
+</html>

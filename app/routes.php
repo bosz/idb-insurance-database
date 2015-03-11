@@ -30,16 +30,6 @@ Route::get('/aboutUs', array('as' => 'aboutUs', 'uses' => 'homeController@action
 /*HOME ROUTING ***************************************/
 
 
-/*CARS ROUTING************************ carsController  ****************/
-
-Route::get('/cars', array('as' => 'homeCar', 'uses' => 'carsController@action_index'));
-
-Route::get('/cars/add', array('as' => 'addCar', 'uses' => 'carsController@action_addCar'));
-
-Route::get('/cars/info', array('as' => 'viewCar', 'uses' => 'carsController@action_viewCars'));
-
-/*CARS ROUTING ***************************************/
-
 
 
 /*ACCIDENTS ROUTING************************ accidentsController  ****************/
@@ -50,7 +40,11 @@ Route::group(array('before' => 'auth', 'prefix' => '/accidents/'), function()
 
 	Route::post('/recordAccident', array('as' => 'recordAccident', 'uses' => 'accidentsController@action_recordAccidents'));
 
+	Route::get('/recordAccidentForm', array('as' => 'recordAccidentDisplay', 'uses' => 'accidentsController@action_recordAccidentDisplay'));
+
 	Route::post('/addParticipant', array('as' => 'addAccidentParticipant', 'uses' => 'accidentsController@action_addParticipant'));
+
+	Route::get('/addParticipant', array('as' => 'addAccidentParticipantDisplay', 'uses' => 'accidentsController@action_addParticipantForm'));	
 
 	Route::post('/edit/{reportNumber}', array('as' => 'editAccident', 'uses' => 'accidentsController@action_EditAccident'));
 
@@ -71,6 +65,8 @@ Route::group(array('before' => 'auth', 'prefix' => '/accidents/'), function()
 Route::group(array('before' => 'auth', 'prefix' => '/reports/'), function()
 {
 	Route::get('/', array('as' => 'homeReports', 'uses' => 'reportsController@action_index'));
+
+	Route::post('/accidents/driver', array('as' => 'sumDriversCarsParticipation', 'uses' => 'reportsController@driversCarInvolvedInAccident'));
 
 	Route::get('/{type}', array('as' => 'moreReports', 'uses' => 'reportsController@action_categorical'));
 });
@@ -118,10 +114,23 @@ DAISY DAISY DAISY  ---------- cars cars cars ---------- DAISY DAISY DAISY
 DAISY DAISY DAISY DAISY DAISY DAISY DAISY DAISY DAISY DAISY DAISY DAISY 
 ======================================================================== beginning*/
 
-Route::resource('cars', 'CarController');
-Route::get('/cars/edit/{carId}', array('as' => 'editCar', 'uses' => 'CarController@action_editCar'));
-Route::post('/cars/edit/commit', array('as' => 'commitEdits', 'uses' => 'CarController@action_commitEdits'));
-Route::post('/cars/delete/{regno}', array('as' => 'deleteCar', 'uses' => 'CarController@action_deleteCar'));
+Route::group(array('before' => 'auth', 'prefix' => '/cars'), function()
+{
+	Route::resource('/', 'CarController');
+	Route::get('/', array('as' => 'homeCar', 'uses' => 'CarController@action_index'));
+	Route::post('/create', array('as' => 'addCar', 'uses' => 'CarController@action_store'));
+	Route::get('/edit/{carId}', array('as' => 'editCar', 'uses' => 'CarController@action_editCar'));
+	Route::post('/edit/commit', array('as' => 'commitEdits', 'uses' => 'CarController@action_commitEdits'));
+	Route::post('/delete/{regno}', array('as' => 'deleteCar', 'uses' => 'CarController@action_deleteCar'));
+
+});
+
+
+
+
+Route::get('/cars/create', array('as' => 'addCar', 'uses' => 'CarController@create'));
+
+//Route::get('/cars/info/{regno}', array('as' => 'viewCar', 'uses' => 'CarsController@action_viewCars'));
 
 
 
@@ -141,32 +150,42 @@ DAISY DAISY DAISY DAISY DAISY DAISY DAISY DAISY DAISY DAISY DAISY DAISY
 THEOPHILUS THEOPHILUS THEOPHILUS THEOPHILUS THEOPHILUS THEOPHILUS THEOPHILUS THEOPHILUS THEOPHILUS
  THEOPHILUS THEOPHILUS THEOPHILUS THEOPHILUS THEOPHILUS THEOPHILUS THEOPHILUS THEOPHILUS THEOPHILUS
  **************** ownersController  ****************/
+Route::group(array('before' => 'auth', 'prefix' => '/owners'), function()
+{
 
-Route::get('/owners', array('as' => 'homeOwners', 'uses' => 'ownersController@action_index'));
+	Route::get('/', array('as' => 'homeOwners', 'uses' => 'ownersController@action_index'));
 
-Route::post('/owners/back', array('as' => 'backFromEdit', 'uses' => 'ownersController@action_canceledEdit'));
+	Route::post('/back', array('as' => 'backFromEdit', 'uses' => 'ownersController@action_canceledEdit'));
 
-Route::post('/owners/link', array('as' => 'linkDriverCar', 'uses' => 'ownersController@action_linkDriverToCar'));
+	Route::post('/link', array('as' => 'linkDriverCar', 'uses' => 'ownersController@action_linkDriverToCar'));
 
-Route::get('/owners/unlink/{driver_id}/{regno}', array('as' => 'unlinkDriverCar', 'uses' => 'ownersController@action_unlinkDriverFromCar'));
+	Route::get('/link', array('as' => 'linkDriverCarDisplay', 'uses' => 'ownersController@action_linkDriverToCarDisplay'));
 
-Route::get('/owners/info', array('as' => 'viewOwners', 'uses' => 'ownersController@action_viewOwners'));
+	Route::get('/unlink/{driver_id}/{regno}', array('as' => 'unlinkDriverCar', 'uses' => 'ownersController@action_unlinkDriverFromCar'));
 
-Route::post('/owners/confirm', array('as' => 'confirmOwners', 'uses' => 'ownersController@action_addNewOwner'));
+	Route::get('/info', array('as' => 'viewOwners', 'uses' => 'ownersController@action_viewOwners'));
 
-Route::post('/owners/add', array('as' => 'addOwners', 'uses' => 'ownersController@action_addOwner'));
+	Route::post('/confirm', array('as' => 'confirmOwners', 'uses' => 'ownersController@action_addNewOwner'));
 
-/*Route::post('/owners/success', array('as' => 'successfullyAddedOwners', 'uses' => 'ownersController@action_successfullyAddedOwner'));
-*/
-Route::post('/owners/success', array('as' => 'successfullyAddedOwners', 'uses' => 'ownersController@action_successfullyAddedOwnerpost'));
+	Route::post('/add', array('as' => 'addOwners', 'uses' => 'ownersController@action_addOwner'));
 
-Route::post('/owners/confirmModifications/delete/{car_matriculation}', array('as' => 'confirmModifs', 'uses' => 'ownersController@action_confirmModificationspost'));
+	Route::get('/add', array('as' => 'addOwnersDisplay', 'uses' => 'ownersController@action_addOwnerDisplay'));
 
-Route::post('/owners/edit/{driver_id}', array('as' => 'editDriverInfo', 'uses' => 'ownersController@action_editDriverInfo'));
+	/*Route::post('/owners/success', array('as' => 'successfullyAddedOwners', 'uses' => 'ownersController@action_successfullyAddedOwner'));
+	*/
+	Route::post('/owners/success', array('as' => 'successfullyAddedOwners', 'uses' => 'ownersController@action_successfullyAddedOwnerpost'));
 
-Route::post('/owners/edit/driver/commit', array('as' => 'commitEdit', 'uses' => 'ownersController@action_commitEdit'));
+	Route::post('/owners/confirmModifications/delete/{car_matriculation}', array('as' => 'confirmModifs', 'uses' => 'ownersController@action_confirmModificationspost'));
 
-Route::post('/owners/delete/{car_matriculation}', array('as' => 'deleteDriver', 'uses' => 'ownersController@action_deleteOwner'));
+	Route::post('/owners/edit/{driver_id}', array('as' => 'editDriverInfo', 'uses' => 'ownersController@action_editDriverInfo'));
+
+	Route::post('/owners/edit/driver/commit', array('as' => 'commitEdit', 'uses' => 'ownersController@action_commitEdit'));
+
+	Route::post('/owners/delete/{car_matriculation}', array('as' => 'deleteDriver', 'uses' => 'ownersController@action_deleteOwner'));
+
+
+});
+
 
 
 /*PERSONS ROUTING********

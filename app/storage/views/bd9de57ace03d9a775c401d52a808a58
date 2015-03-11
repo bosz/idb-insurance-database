@@ -26,12 +26,12 @@
 	  </div><!--close welcome-->
       <div id="menu_items">
 	    <ul id="menu">
-          <li class="current" ><a href="{{URL::route('welcome')}}">Home</a></li>
-		  <li><a href="{{URL::route('homeCar')}}">Cars</a></li>
-		  <li><a href="{{URL::route('homeOwners')}}">Owners</a></li>
-		  <li><a href="{{URL::route('homeAccidents')}}">Accidents</a></li>
-		  <li><a href="{{URL::route('homeReports')}}">Reports</a></li>
-		  <li><a href="{{URL::route('homeAccounts')}}">Accounts</a></li>
+          <li class="current" ><a href="<?php echo URL::route('welcome'); ?>">Home</a></li>
+		  <li><a href="<?php echo URL::route('homeCar'); ?>">Cars</a></li>
+		  <li><a href="<?php echo URL::route('homeOwners'); ?>">Owners</a></li>
+		  <li><a href="<?php echo URL::route('homeAccidents'); ?>">Accidents</a></li>
+		  <li><a href="<?php echo URL::route('homeReports'); ?>">Reports</a></li>
+		  <li><a href="<?php echo URL::route('homeAccounts'); ?>">Accounts</a></li>
         </ul>
       </div><!--close menu-->
     </div><!--close menubar-->	
@@ -49,7 +49,7 @@
 		</div><!--close slider_wrapper-->
 	  </div><!--close banner_image-->	
 
-		@include('general/sideBar')	  
+		<?php echo $__env->make('general/sideBar', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>	  
 	 
 	  <div id="content">
         <div class="content_item">
@@ -61,7 +61,7 @@
 		</div><!--close content_item-->
       </div><!--close content-->   
 
-	@include('general/footer')	
+	<?php echo $__env->make('general/footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>	
 
 	</div><!--close site_content--> 
   

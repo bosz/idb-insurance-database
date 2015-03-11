@@ -8,7 +8,7 @@ class CarController extends BaseController {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function action_index()
 	{
 		//get all cars
 		$carsList=Cars::all();
@@ -27,13 +27,18 @@ class CarController extends BaseController {
 		return View::make('cars.create');
 	}
 
+	public function action_createCommit(){
+		echo "i want to commit cars";
+		exit();
+	}
+
 
 	/**
 	 * Store a newly created resource in storage.
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function action_store()
 	{
 		//rule validation
 		//$date = date("Y");
@@ -62,13 +67,13 @@ class CarController extends BaseController {
 
 			$cars->save();
 
-			return Redirect::route('cars.index')
+			return Redirect::route('homeCar')
 			->withInput()
 			->withErrors($validation)
 			->with('success', 'Successfully created car.');
       	}
       	//show error message
-      	return Redirect::route('cars.index')
+      	return Redirect::route('homeCar')
            ->withInput()
            ->withErrors($validation)
            ->with('message', 'Some fields are incomplete.');
@@ -87,7 +92,7 @@ class CarController extends BaseController {
 		$car = Cars::find($id);
         if (is_null($car))
         {
-            return Redirect::route('cars.index');
+            return Redirect::route('homeCar');
         }
         return View::make('cars.show', compact('car'));
 	}
@@ -103,7 +108,7 @@ class CarController extends BaseController {
 		//delete car
 		echo "just changed";
 		Cars::where('regno', '=', $regno)->delete();
-        return Redirect::route('cars.index')
+        return Redirect::route('homeCar')
             ->withInput()
             ->with('success', 'Successfully deleted car.');
 
@@ -111,12 +116,19 @@ class CarController extends BaseController {
 
 	public function action_deleteCar($regno)
 	{
-		//delete car
-		echo "just changed";
-		Cars::where('regno', '=', $regno)->delete();
-        return Redirect::route('cars.index')
-            ->withInput()
-            ->with('message', 'Successfully deleted entry.');
+		try{
+			echo "just changed";
+			Cars::where('regno', '=', $regno)->delete();
+	        return Redirect::route('homeCar')
+	            ->withInput()
+	            ->with('message', 'Successfully deleted entry.');
+	        }catch (\Exception $e){
+	        	return Redirect::route('homeCar')
+	            ->withInput()
+	            ->with('error', 'Violating key contraint. <br> 
+	            	Please, check to make sure that the car is not assigned
+	            	 to an owner or is currently active on an accident');
+	        }
 
 	}
 
@@ -126,7 +138,7 @@ class CarController extends BaseController {
 
         if (is_null($car))
         {
-            return Redirect::route('cars.index');
+            return Redirect::route('homeCar');
         }
 
         return View::make('cars.edit')->with('car' , $car);
@@ -146,7 +158,7 @@ class CarController extends BaseController {
             ->update(['model' => Input::get('model'), 
             		  'year'  => Input::get('year')]);
            
-            return Redirect::route('cars.index')
+            return Redirect::route('homeCar')
                 ->withInput()
                 ->withErrors($validation)
                 ->with('message', 'Successfully updated entry.');

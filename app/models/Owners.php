@@ -4,6 +4,9 @@
 	*/
 	class Owners extends Eloquent
 	{
+		use SoftDeletingTrait;
+
+		protected $dates = ['deleted_at'];
 		protected $table = 'owners';
 		protected $fillable = array('name', 'address', 'date_of_birth', 'phone_number', 'car_matriculation', 'gender');
 		public $timestamp = true;

@@ -38,11 +38,10 @@
     </div><!--close slider_wrapper-->
     </div><!--close banner_image--> 
 
-    @include('general/sideBar')   
    
     <div id="content">
-        <div class="content_item"><br>
-       <center><h1 class="down_title">Driver Management )-(o Home </h1> 
+        <div class="content_item" style="width: 900px;"><br>
+       <center><h1 class="down_title">Driver Management :: Home </h1> 
        <em>In this section of idb, you get to input information about cars you insure</em></center>
         
         <p style="display:inline;" class="returned-with"> 
@@ -123,7 +122,6 @@
             @else
             <strong>No drivers for far</strong>
             @endif
-          <h5>Work goes here</h5>
         </div>            
     </div><!--close content_item-->
       </div><!--close content-->   

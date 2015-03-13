@@ -7,9 +7,8 @@ use Illuminate\Auth\Reminders\RemindableInterface;
 
 class Cars extends Eloquent{
 	
-	public function getAllCars(){
-		
+	use SoftDeletingTrait;
 
-	}
+	protected $dates = ['deleted_at'];
 
 }

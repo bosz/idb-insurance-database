@@ -27,6 +27,7 @@ class Cars extends Migration {
 
 	        // created_at | updated_at DATETIME
 			$table->timestamps();
+			$table->softDeletes();
 
 		});
 	}
@@ -38,7 +39,7 @@ class Cars extends Migration {
 	 */
 	public function down()
 	{
-		Schema::dropIfExists('cars');
+		Schema::drop('cars');
 	}
 
 }

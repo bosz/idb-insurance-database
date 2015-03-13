@@ -38,12 +38,13 @@
 			$signup_rules = [
 				'name'			=>		'required', 
 				'email'			=>		'required|email',
-				'username'		=>		'required|min:8',
-				'password'		=>		'required|min:8',
+				'username'		=>		'required|min:4',
+				'password'		=>		'required|min:4',
 				'role'			=>		'required'
 			];
 
-			var_dump(Input::all());
+
+			//var_dump(Input::all());
 
 			$validator = Validator::make(Input::all(), $signup_rules);
 			if ($validator->passes()){
@@ -57,6 +58,7 @@
 
 				$user->save();
 
+
 				if(Auth::attempt(Input::only('username', 'password'), true)) {
 					return Redirect::intended('/')
 					->with('message', 'Logged in successfully');
@@ -68,7 +70,7 @@
 			}
 
 			return Redirect::route('welcome')
-			->with('error', $validator->messages()->all())
+			->withErrors($validator)
 			->withInput();
 
 		}

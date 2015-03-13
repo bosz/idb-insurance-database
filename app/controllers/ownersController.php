@@ -5,8 +5,8 @@
 		public function action_index(){
 			$carsOwned = $this->generateAllOwnedCars();
 
-			$driver = Drivers::all();
-			$own = Owns::all();
+			$driver = Drivers::orderBy('created_at', 'desc')->get();
+			$own = Owns::orderBy('created_at', 'desc')->get();
 
 
 			return View::make('owners.home')
@@ -61,15 +61,21 @@
 		}
 
 		public function action_unlinkDriverFromCar($driver_id, $regno){
-
-			$own = Owns::where('driver_id', '=', $driver_id)
+			try{	
+				$own = Owns::where('driver_id', '=', $driver_id)
 					->where('regno', '=', $regno)->delete();
 
-			return Redirect::route('homeOwners')
-				->with('success', 'Link between driver ' 
-					. $driver_id. " and car " 
-					. $regno. " broken succesfully");
-		
+				return Redirect::route('homeOwners')
+					->with('success', 'Link between driver ' 
+						. $driver_id. " and car " 
+						. $regno. " broken succesfully");
+				}catch (\Exception $e){
+		        	return Redirect::route('homeOwners')
+		            ->withInput()
+		            ->with('error', 'Violating key contraint. <br> 
+		            	Please, check to make sure that the car is not assigned
+		            	 to an owner or is currently active on an accident');
+		        }
 		}
 
 		
@@ -95,53 +101,61 @@
 		}
 
 		public function action_successfullyAddedOwnerpost(){
-			//get all owner information
-			$verification = Input::all();
-			//basic validation rules
-			$rules=array(
-			'name' => 'required', 
-			'address'=>'required',
-			'phone_number'=>'required',
-			'date_of_birth' => 'required',
-			'regno' => 'required'
-			);
-			$validation=Validator::make($verification, $rules);
-			if($validation->passes())
-			{
+			try{
+				//get all owner information
+				$verification = Input::all();
+				//basic validation rules
+				$rules=array(
+				'name' => 'required', 
+				'address'=>'required',
+				'phone_number'=>'required',
+				'date_of_birth' => 'required',
+				'regno' => 'required'
+				);
+				$validation=Validator::make($verification, $rules);
+				if($validation->passes())
+				{
 
-				$driver = new Drivers();
-				$driver->driver_id 		= 	Input::get('driver_id');
-				$driver->name 			= 	Input::get('name');
-				$driver->address 		= 	Input::get('address');
-				$driver->dob 			= 	Input::get('date_of_birth');
-				$driver->phone_number 	= 	Input::get('phone_number');
-				$driver->gender 		= 	Input::get('gender');
-				$driver->user_id 		= 	Auth::user()->id;
+					$driver = new Drivers();
+					$driver->driver_id 		= 	Input::get('driver_id');
+					$driver->name 			= 	Input::get('name');
+					$driver->address 		= 	Input::get('address');
+					$driver->dob 			= 	Input::get('date_of_birth');
+					$driver->phone_number 	= 	Input::get('phone_number');
+					$driver->gender 		= 	Input::get('gender');
+					$driver->user_id 		= 	Auth::user()->id;
 
-				$own = new Owns();
-				$own->regno 			= 	Input::get('regno');
-				$own->driver_id 		= 	Input::get('driver_id');
-				$own->user_id 			= 	Auth::user()->id;
-				
-				//$driver->save();
-				if ($driver->save() && $own->save()) {
-					return Redirect::route('homeOwners')
-					->withInput()
-					->withErrors($validation)
-					->with('success', 'Driver succesfully added to idb');
+					$own = new Owns();
+					$own->regno 			= 	Input::get('regno');
+					$own->driver_id 		= 	Input::get('driver_id');
+					$own->user_id 			= 	Auth::user()->id;
+					
+					//$driver->save();
+					if ($driver->save() && $own->save()) {
+						return Redirect::route('homeOwners')
+						->withInput()
+						->withErrors($validation)
+						->with('success', 'Driver succesfully added to idb');
 
+					}
+					else{
+						return Redirect::route('addOwnersDisplay')
+							->withInput()
+							->with('error', 'Error while trying to add driver');
+					}
 				}
 				else{
-					return Redirect::route('homeOwners')
+					return Redirect::route('addOwnersDisplay')
 						->withInput()
+						->withErrors($validation)
+						->with('error', 'Error while trying to add driver');
+					}
+				}catch(\Exception $e){
+					return Redirect::route('addOwnersDisplay')
+						->withInput()
+						->withErrors($validation)
 						->with('error', 'Error while trying to add driver');
 				}
-			}
-			else
-				return Redirect::route('homeOwners')
-					->withInput()
-					->withErrors($validation)
-					->with('error', 'Error while trying to add driver');
 		}
 /*-------------------------------------------------------------------------------------MODIFYING OWNERS----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 		public function action_viewOwners(){
@@ -152,13 +166,21 @@
 		}
 
 		public function action_deleteOwner($driver_id){
-			
+			try{	
 				$driver = Drivers::where('driver_id', '=', $driver_id)
 				->delete();
 
 				return Redirect::route('homeOwners')
 					->with('success', 'Driver ' 
 						. $driver_id . " deleted succesfully");
+	        }catch (\Exception $e){
+	        	return Redirect::route('homeOwners')
+	            ->withInput()
+	            ->with('error', 'Violating key contraint. <br> 
+	            	Please, check to make sure that the car is not assigned
+	            	 to an owner or is currently active on an accident');
+	        }
+
 		
 		}
 

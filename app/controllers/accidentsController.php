@@ -7,8 +7,8 @@
 
 			$driver = Drivers::query()->get(array('name', 'driver_id'));
 
-			$accidents = Accidents::all();
-			$participants = Participants::all();
+			$accidents = Accidents::orderBy('created_at', 'desc')->get();
+			$participants = Participants::orderBy('created_at', 'desc')->get();
 
 			return View::make('accidents.home')
 			->with('regnoList', $regno)

@@ -3,6 +3,12 @@
 /*AUTHOR :: NKWETEYIM DAISY @ idb_dev*/
 class CarController extends BaseController {
 
+	protected $totalAccidentNum;
+	protected $totalAccidentParticipant;
+	protected $totalAccidentCost;
+
+
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -11,7 +17,7 @@ class CarController extends BaseController {
 	public function action_index()
 	{
 		//get all cars
-		$carsList=Cars::all();
+		$carsList=Cars::orderBy('created_at', 'desc')->get();
 		return View::make('cars.index', compact ('carsList'));
 	}
 
@@ -40,43 +46,50 @@ class CarController extends BaseController {
 	 */
 	public function action_store()
 	{
-		//rule validation
-		//$date = date("Y");
-		$rules=array(
-			'regno' => 'required', 
-			'model'=>'required',
-			'year'=>'required|integer|digits_between:4,4'
-		);
+		try{
+			//rule validation
+			//$date = date("Y");
+			$rules=array(
+				'regno' => 'required', 
+				'model'=>'required',
+				'year'=>'required|integer|digits_between:4,4'
+			);
 
-		/*$regno_validate = array('regno.unique'	=>	'Car registration number already existing.
-													 Please try another one',);*/
+			/*$regno_validate = array('regno.unique'	=>	'Car registration number already existing.
+														 Please try another one',);*/
 
-		//get all car information
-		$carInfo = Input::all();
+			//get all car information
+			$carInfo = Input::all();
 
-		//validate car information with the rules
-		$validation=Validator::make($carInfo, $rules);
-		if($validation->passes())
-		{
+			//validate car information with the rules
+			$validation=Validator::make($carInfo, $rules);
+			if($validation->passes())
+			{
 
-			$cars = new Cars();
-			$cars->regno = Input::get('regno');
-			$cars->model = Input::get('model');
-			$cars->year  = Input::get('year');
-			$cars->user_id = Auth::user()->id;
+				$cars = new Cars();
+				$cars->regno = Input::get('regno');
+				$cars->model = Input::get('model');
+				$cars->year  = Input::get('year');
+				$cars->user_id = Auth::user()->id;
 
-			$cars->save();
+				$cars->save();
 
-			return Redirect::route('homeCar')
-			->withInput()
-			->withErrors($validation)
-			->with('success', 'Successfully created car.');
-      	}
-      	//show error message
-      	return Redirect::route('homeCar')
-           ->withInput()
-           ->withErrors($validation)
-           ->with('message', 'Some fields are incomplete.');
+				return Redirect::route('homeCar')
+				->withInput()
+				->with('success', 'Successfully created car.');
+	      	}
+	      	//show error message
+	      	return Redirect::route('addCar')
+	           ->withInput()
+	           ->withErrors($validation)
+	           ->with('error', 'Some fields are incomplete.');
+	       }catch(\Exception $e){
+	       		return Redirect::route('addCar')
+		           ->withInput()
+		           ->with('error', 'Car already exists with registration Number ' 
+		           	. Input::get('regno') . "<br>Please, make sure that 
+		           	registrations number is the correct one");
+	       }
 	}
 		
 
@@ -121,7 +134,7 @@ class CarController extends BaseController {
 			Cars::where('regno', '=', $regno)->delete();
 	        return Redirect::route('homeCar')
 	            ->withInput()
-	            ->with('message', 'Successfully deleted entry.');
+	            ->with('success', 'Successfully deleted entry.');
 	        }catch (\Exception $e){
 	        	return Redirect::route('homeCar')
 	            ->withInput()

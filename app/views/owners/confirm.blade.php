@@ -42,7 +42,7 @@
    
     <div id="content"><br>
         <div class="content_item">
-      <center><h1 class="down_title">Driver Management )-(o Confirm Driver Addition </h1> 
+      <center><h1 class="down_title">Driver Management :: Confirm Driver Addition </h1> 
         <em>You are about to add driver {{$data['driver_id']}}. Review the details and click on commit to execute the </em> </center>
         
         <p style="display:inline;" class="returned-with"> 

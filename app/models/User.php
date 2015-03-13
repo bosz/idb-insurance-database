@@ -7,6 +7,10 @@ use Illuminate\Auth\Reminders\RemindableInterface;
 
 class User extends Eloquent implements UserInterface, RemindableInterface {
 
+	use SoftDeletingTrait;
+
+	protected $dates = ['deleted_at'];
+
 	use UserTrait, RemindableTrait;
 
 	/**

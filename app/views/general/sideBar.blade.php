@@ -20,16 +20,22 @@
     </div><!--close sidebar_item--> 
   </div><!--close sidebar-->          
   <div class="sidebar">
-    <div class="sidebar_item">
-      <h2>Latest Update</h2>
-      <h3>February 2013</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque cursus tempor enim.</p>         
+    <div class="sidebar_item quick_links">
+      <h2>Quick Navigation</h2>
+      <h3>Quick Links through IDb</h3>
+      <p>
+        <a href="{{URL::route('addCar')}}"> Add New Car  </a>&nbsp; | &nbsp;<a href="{{URL::route('addOwnersDisplay')}}"> Add new car owner </a>&nbsp; | &nbsp;
+        <a href="{{URL::route('homeOwners')}}"> Display Drivers </a>&nbsp; | &nbsp; <a href="{{URL::route('linkDriverCarDisplay')}}"> Link driver and car </a> &nbsp; | &nbsp; 
+        <a href="{{URL::route('homeAccidents')}}"> View all accidents </a> &nbsp; | &nbsp; 
+        <a href="{{URL::route('recordAccidentDisplay')}}"> Record new accident </a> &nbsp; | &nbsp; <a href="{{URL::route('addAccidentParticipantDisplay')}}"> Add participant to accident </a> &nbsp; | &nbsp; 
+        <a href="{{URL::route('homeReports')}}"> Generate Report </a> &nbsp; | &nbsp; <a href="{{URL::route('homeAccounts')}}"> Manage User Accounts </a>&nbsp; &nbsp;
+         </p>         
     </div><!--close sidebar_item--> 
   </div><!--close sidebar-->
   <div class="sidebar">
     <div class="sidebar_item">
-      <h3>January 2013</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque cursus tempor enim.</p>         
+      <h3> {{  date('D, d M Y')}} </h3>
+      <p></p>         
     </div><!--close sidebar_item--> 
   </div><!--close sidebar-->          
 </div><!--close sidebar_container-->  

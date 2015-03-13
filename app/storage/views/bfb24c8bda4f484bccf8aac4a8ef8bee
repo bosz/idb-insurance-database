@@ -42,7 +42,7 @@
    
     <div id="content">
         <div class="content_item">
-      <h1 class="down_title">Car Management )-(o Home </h1> 
+      <h1 class="down_title">Car Management :: Home </h1> 
         <em>In this section of idb, you get to input information about cars you insure</em> 
         
         <p style="display:inline;" class="returned-with"> 
@@ -55,7 +55,7 @@
 
           <?php if($errors->any()): ?><ul class="lastError"><?php echo implode('', $errors->all('<li class="error">:message</li>')); ?></ul><?php endif; ?>
           
-        </p><br><br>
+        </p><br>
         <div class="sub_operations"><a href="<?php echo URL::route('addCar'); ?>" class="inline" > Add New Car </a></div>
         <div><br>
 
@@ -74,7 +74,7 @@
                 <tbody>
                 <?php foreach($carsList as $car): ?>
                 <tr>
-                  <td><?php echo $car->regno; ?></td>
+                  <td><?php echo strtoupper($car->regno); ?></td>
                   <td><?php echo $car->model; ?></td>
                   <td><?php echo $car->year; ?></td>
                    
@@ -100,7 +100,6 @@
             <?php else: ?>
             There are no cars
             <?php endif; ?>
-          <h5>Work goes here</h5>
         </div>            
     </div><!--close content_item-->
       </div><!--close content-->   

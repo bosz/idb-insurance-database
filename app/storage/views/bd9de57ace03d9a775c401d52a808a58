@@ -43,8 +43,8 @@
           <div id="slider" class="nivoSlider">
             <img src="images/home_1.jpg" alt="" />
             <img src="images/home_2.jpg" alt="" />
-            <img src="images/home_1.jpg" alt="" />
-            <img src="images/home_2.jpg" alt="" />
+            <img src="images/home_3.jpg" alt="" />
+            <img src="images/home_4.jpg" alt="" />
 		  </div><!--close slider-->
 		</div><!--close slider_wrapper-->
 	  </div><!--close banner_image-->	
@@ -53,11 +53,17 @@
 	 
 	  <div id="content">
         <div class="content_item">
-		  <h1 class="down_title">Page Title Here -- </h1> 
-	      <em>The introduction to this page</em> 
-	      <div>
-	      	<h5>Work goes here</h5>
-	      </div>		  		  
+		  <h1 class="down_title"> Welcome To The Insurance Database, IDb </h1> 
+	      <center><em>Ordering Your Information</em> </center>
+	      <div style="font-size: 18px;">
+	      	<center><h4>Introduction</h4></center><br><br>
+<!-- 	       <p>Wars come and wars go but a true soldier is one who is forever ready for a battle</p>
+ -->         <p>Idb is a flexible, robust and dynamic insurance database systems for cars. It helps a company to keep track of all cars
+         accidents, owners and link cars to owners in the system. </p><br>
+         <p>With idb, every user's activity is tracked such that in case of any problems, a review of activities per user can be 
+          made to be able to track the origin of the error/fault.</p>
+          <br><hr><br><br><marquee><img src="images/car.jpg"></marquee>
+        </div>		  		  
 		</div><!--close content_item-->
       </div><!--close content-->   
 

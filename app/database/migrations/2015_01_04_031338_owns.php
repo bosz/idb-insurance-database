@@ -30,6 +30,7 @@ class Owns extends Migration {
 
 	        // created_at | updated_at DATETIME
 			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 

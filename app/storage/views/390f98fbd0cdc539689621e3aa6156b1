@@ -17,8 +17,8 @@
       <ul id="menu">
         <li><a href="<?php echo URL::route('welcome'); ?>">Home</a></li>
         <li><a href="<?php echo URL::route('homeCar'); ?>">Cars</a></li>
-        <li class="current" ><a href="<?php echo URL::route('homeOwners'); ?>">Owners</a></li>
-        <li><a href="<?php echo URL::route('homeAccidents'); ?>">Accidents</a></li>
+        <li><a href="<?php echo URL::route('homeOwners'); ?>">Owners</a></li>
+        <li class="current" ><a href="<?php echo URL::route('homeAccidents'); ?>">Accidents</a></li>
         <li><a href="<?php echo URL::route('homeReports'); ?>">Reports</a></li>
         <li><a href="<?php echo URL::route('homeAccounts'); ?>">Accounts</a></li>
       </ul>
@@ -38,11 +38,10 @@
     </div><!--close slider_wrapper-->
     </div><!--close banner_image--> 
 
-    <?php echo $__env->make('general/sideBar', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>   
    
     <div id="content">
-        <div class="content_item"><br>
-       <center><h1 class="down_title">Accident Management )-(o Home </h1> 
+        <div class="content_item" style="width:900px"><br>
+       <center><h1 class="down_title">Accident Management :: Home </h1> 
        <em>In this section of idb, you get to input information about cars you insure</em></center>
         
         <p style="display:inline;" class="returned-with"> 
@@ -56,24 +55,10 @@
           <?php if($errors->any()): ?><ul class="lastError"><?php echo implode('', $errors->all('<li class="error">:message</li>')); ?></ul><?php endif; ?>
           
         </p><br>
-        <div class="sub_operations"><a href="<?php echo URL::route('recordAccidentDisplay'); ?>" class="inline" > Record New wAccident </a> 
+        <div class="sub_operations"><a href="<?php echo URL::route('recordAccidentDisplay'); ?>" class="inline" > Record New Accident </a> 
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <a href="<?php echo URL::route('addAccidentParticipantDisplay'); ?>" class="inline" > Add New Participant </a></div>
        <div>
-          <?php if(Session::has('success')): ?>
-              <ul class="list-group" style="color: green;">
-                <li class="list-group-item list-group-success">
-                  <?php echo Session::get('success');; ?> 
-                </li>
-            </ul>
-            <?php endif; ?>
-
-            <?php if($errors->any()): ?>
-            <ul class="lastError">
-              <?php echo implode('', $errors->all('<li class="error">:message</li>')); ?>
-
-            </ul>
-            <?php endif; ?>
           
           </p><br>
 
@@ -141,7 +126,6 @@
             <strong>No accidents for far</strong>
             <?php endif; ?>
 
-          <h5>Work goes here</h5>
         </div>            
     </div><!--close content_item-->
       </div><!--close content-->   

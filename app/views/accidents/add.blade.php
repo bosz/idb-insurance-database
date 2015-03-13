@@ -42,7 +42,7 @@
    
     <div id="content">
         <div class="content_item">
-      <h1 class="down_title">Accident Management )-(o New Accident </h1> 
+      <h1 class="down_title">Accident Management :: New Accident </h1> 
         <em>In this section of idb, you get to input information about cars you insure</em> 
         
         <p style="display:inline;" class="returned-with"> 

@@ -42,7 +42,7 @@
    
     <div id="content">
         <div class="content_item">
-      <h1 class="down_title">User Accounts Management )-(o Home </h1> 
+      <h1 class="down_title">User Accounts Management :: Home </h1> 
         <em>Get to add, edit and delete user in idb very easily</em> 
         
         <p style="display:inline;" class="returned-with"> 
@@ -59,7 +59,6 @@
         <div class="sub_operations">
         	<a href="#loginFormDiv" class="inline" > Create A New Account </a>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href="{{URL::route('viewUser')}}"> View | Edit | Delete Existing Users </a>
 		</div>
         <div><br>
         	<center><div id="wrapper">
@@ -79,7 +78,6 @@
 					id="createUserSubmit" value="save" class="submitt">Create User</button>
 				{{ Form::close() }}
         	</div></center>  
-          <h5>Work goes here</h5>
         </div>            
     </div><!--close content_item-->
       </div><!--close content-->   

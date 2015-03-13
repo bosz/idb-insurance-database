@@ -16,6 +16,7 @@ class CreateSessionTable extends Migration {
 			$t->string('id')->unique();
 			$t->text('payload');
 			$t->integer('last_activity');
+			$t->softDeletes();
 		});
 	}
 

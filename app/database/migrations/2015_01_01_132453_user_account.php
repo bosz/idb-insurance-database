@@ -27,8 +27,16 @@ class UserAccount extends Migration {
 
 	        // created_at | updated_at DATETIME
 			$table->timestamps();
+			$table->softDeletes();
 
 	    });
+
+	    /*add default users*/
+	   /* $user = User::create(array('name' 		=> 		'adminstrator',
+	    							'email'		=> 		'fongohmartin@gmail.com', 
+	    							'username'	=>		'admin', 
+	    							'password'	=>		Hash::make('admin'), 
+	    							'role'		=> 		'A'));*/
 	}
 
 	/**

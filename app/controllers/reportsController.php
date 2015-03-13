@@ -155,7 +155,7 @@
 					          <td>" .  $car->regno 	. 	" </td>
 					          <td>" .  $car->model 		.  	"</td>
 					          <td>" .  $car->year 		. 	"</td>
-					          <td>" .  $car->user_id 	. 	"</td>
+					          <td>" .  $car->created_at 	. 	"</td>
 					          <td class='delEditOptions'>
 					          	<button class='warning'>Edit</button>
 					          	<button class='danger'>Delete</button>

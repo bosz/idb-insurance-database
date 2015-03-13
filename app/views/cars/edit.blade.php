@@ -42,7 +42,7 @@
    
     <div id="content">
         <div class="content_item">
-      <h1 class="down_title">Car Management )-(o Car Editing </h1> 
+      <h1 class="down_title">Car Management ::  Car Editing </h1> 
         <em>In this section of idb, you get to input information about cars you insure</em> 
         
         <p style="display:inline;" class="returned-with"> 
@@ -65,8 +65,8 @@
                 {{ Form::open(array('route' => 'commitEdits')) }}
                 
                   
-                        <label>Registration Number</label><br>
-                        <input value='{{ $car->regno  }}' type="text" id="regno" name="regno" placeholder="Car Registration Number" >
+<!--                         <label>Registration Number</label><br>
+ -->                        <input type="hidden" value='{{ $car->regno  }}' type="text" id="regno" name="regno" placeholder="Car Registration Number" >
                   
                         <br><label>Model of Car</label><br>
                         <input value="{{ $car->model }}" type="text" id="model" name="model" placeholder="car model" >

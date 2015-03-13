@@ -52,7 +52,7 @@
     <div id="content">
         <div class="content_item"><br>
        <center><h1 class="down_title">
-       	Reports Module )-(o Home @if($type) {{ $type }} @endif</h1> 
+       	Reports Module :: Home @if($type) {{ $type }} @endif</h1> 
        <em>Get to query out suitable information to help management make strategic decision</em></center>
         
         <p style="display:inline;" class="returned-with"> 
@@ -70,7 +70,6 @@
         	<a href='{{ url('reports/Cars') }}'>Cars</a>&nbsp&nbsp&nbsp&nbsp
 			<a href='{{ url('reports/Drivers') }}'>Drivers</a>&nbsp&nbsp&nbsp&nbsp
 			<a href='{{ url('reports/Accidents') }}'>Accidents</a>&nbsp&nbsp&nbsp&nbsp
-			<a href='{{ url('reports/Owners') }}'>Vehicle Owners</a>&nbsp&nbsp&nbsp&nbsp
 
         </div><br>
         <div class="search">
@@ -83,7 +82,6 @@
           {{ $reportTable }}
 
 
-          <h5>Work goes here</h5>
         </div>            
     </div><!--close content_item-->
       </div><!--close content-->   

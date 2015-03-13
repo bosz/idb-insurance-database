@@ -42,28 +42,25 @@
    
     <div id="content">
         <div class="content_item">
-      <h1 class="down_title">Car Management )-(o Add New Car </h1> 
+      <h1 class="down_title">Car Management :: Add New Car </h1> 
         <em>In this section of idb, you get to input information about cars you insure</em> 
         
         <p style="display:inline;" class="returned-with"> 
             
-          <ul>
-            @if(Session::has('success'))
-            <li style="color: green">{{ Session::get('success'); }}</li>
-            @endif
-            @if(Session::has('error'))
-            <li style="color: red">{{ Session::get('error'); }}</li>
-            @endif
-            @if(Session::has('info'))
-            <li style="color: blue">{{ Session::get('info'); }}</li>
-            @endif
-          </ul>
-        </p>
+          @if(Session::has('success'))<ul class="list-group" style="color: green;"><li class="list-group-item list-group-success">{{ Session::get('success'); }} </li></ul>@endif
+            
+          @if(Session::has('error'))<ul class="list-group" style="color: red;"><li class="list-group-item list-group-danger">{{ Session::get('error'); }} </li></ul>@endif
+            
+          @if(Session::has('info'))<ul class="list-group" style="color: blue;"><li class="list-group-item list-group-info">{{ Session::get('info'); }} </li></ul>@endif
+
+          @if ($errors->any())<ul class="lastError">{{ implode('', $errors->all('<li class="error">:message</li>')) }}</ul>@endif
+          
+        </p><br>
 
         <center><div id="wrapper">
                 <h3><em>Add New Car</em></h3>
                 {{ Form::open(array('route' => 'addCar')) }}
-                    <input type="text" name="regno" placeholder="Car Registration Number" ><br>
+                    <input autofocus type="text" name="regno" placeholder="Car Registration Number" ><br>
                     <input type="text" name="model" placeholder="car model" ><br>
                     <input type="number" name="year" placeholder="year of purchase"><br><br>
                     <button type="submit" name="createUserSubmit" onclick="return validateInputs()"

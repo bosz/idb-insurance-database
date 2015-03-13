@@ -42,31 +42,32 @@
    
     <div id="content">
         <div class="content_item">
-      <h1 class="down_title">Driver Management )-(o Add New Driver </h1> 
+      <h1 class="down_title">Driver Management :: Add New Driver </h1> 
         <em>In this section of idb, you get to input information about cars you insure</em> 
         
         <p style="display:inline;" class="returned-with"> 
             
-          <ul>
-            <?php if(Session::has('success')): ?>
-            <li style="color: green"><?php echo Session::get('success');; ?></li>
-            <?php endif; ?>
-            <?php if(Session::has('error')): ?>
-            <li style="color: red"><?php echo Session::get('error');; ?></li>
-            <?php endif; ?>
-            <?php if(Session::has('info')): ?>
-            <li style="color: blue"><?php echo Session::get('info');; ?></li>
-            <?php endif; ?>
-          </ul>
-        </p>
+          <?php if(Session::has('success')): ?><ul class="list-group" style="color: green;"><li class="list-group-item list-group-success"><?php echo Session::get('success');; ?> </li></ul><?php endif; ?>
+            
+          <?php if(Session::has('error')): ?><ul class="list-group" style="color: red;"><li class="list-group-item list-group-danger"><?php echo Session::get('error');; ?> </li></ul><?php endif; ?>
+            
+          <?php if(Session::has('info')): ?><ul class="list-group" style="color: blue;"><li class="list-group-item list-group-info"><?php echo Session::get('info');; ?> </li></ul><?php endif; ?>
+
+          <?php if($errors->any()): ?><ul class="lastError"><?php echo implode('', $errors->all('<li class="error">:message</li>')); ?></ul><?php endif; ?>
+          
+        </p><br>
 
         <center><div id="wrapper">
-                <h3><em>Add New Car Owner</em></h3>
-                 <?php echo Form::open(array('action' => 'ownersController@action_addNewOwner')); ?> <br>
+            <h3><em>Add New Car Owner</em></h3>
+            <?php echo Form::open(array('action' => 'ownersController@action_addNewOwner')); ?> <br>
             <?php echo Form::text('driver_id', '', array('class' => 'form-control','placeholder' => 'driver\'s id')); ?><br>
             <?php echo Form::text('name', '', array('class' => 'form-control','placeholder' => 'driver\'s name')); ?><br>
             <?php echo Form::text('address', '', array('class' => 'form-control','placeholder' => 'driver\'s address')); ?><br>
-             <?php echo Form::select('gender',array('m'=>'male','f'=>'female')); ?><br>
+            <input type="text" name="gender" placeholder="Gender" list="genderList"/><br>
+            <datalist id="genderList">
+              <option value="M"> Male </option>
+              <option value="F"> Female </option>
+            </datalist> <br>
             <?php echo Form::text('phone_number', '', array('class' => 'form-control','placeholder' => 'phone number')); ?><br>
             <!--<p><?php echo Form::text('date_of_birth', '', array('class' => 'form-control','placeholder' => 'date of birth','type' => 'date')); ?></p>-->
             <input type="date" class="form-control" id="datepicker" placeholder='date of birth' name='date_of_birth'><br>

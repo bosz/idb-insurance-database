@@ -17,9 +17,9 @@ class Drivers extends Migration {
 			$table->string('driver_id');
 			$table->primary('driver_id');
 	        $table->string('address', 45)->nullable();
+	        $table->string('gender', 1)->nullable();
 	        $table->string('name', 45)->nullable();
 	        $table->date('dob')->nullable(); //date of birth
-	        $table->string('name', 1);
 	        $table->string('phone_number')->nullable();
 			
 			$table->integer('user_id')->unsigned();
@@ -30,6 +30,7 @@ class Drivers extends Migration {
 
 	        // created_at | updated_at DATETIME
 			$table->timestamps();
+			$table->softDeletes();
 
 		});
 	}

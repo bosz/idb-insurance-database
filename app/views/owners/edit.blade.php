@@ -42,7 +42,7 @@
    
     <div id="content">
         <div class="content_item">
-      <h1 class="down_title">Driver Management )-(o Driver Editing </h1> 
+      <h1 class="down_title">Driver Management :: Driver Editing </h1> 
         <em>You are editing driver {{$data['driver_id']}}. <br>When you are done with the editing, click on the update button to commit the changes</em> 
         
         <p style="display:inline;" class="returned-with"> 

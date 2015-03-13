@@ -42,7 +42,7 @@
    
     <div id="content">
         <div class="content_item">
-      <h1 class="down_title">Car Management )-(o Home </h1> 
+      <h1 class="down_title">Car Management :: Home </h1> 
         <em>In this section of idb, you get to input information about cars you insure</em> 
         
         <p style="display:inline;" class="returned-with"> 
@@ -55,7 +55,7 @@
 
           @if ($errors->any())<ul class="lastError">{{ implode('', $errors->all('<li class="error">:message</li>')) }}</ul>@endif
           
-        </p><br><br>
+        </p><br>
         <div class="sub_operations"><a href="{{URL::route('addCar')}}" class="inline" > Add New Car </a></div>
         <div><br>
 
@@ -74,7 +74,7 @@
                 <tbody>
                 @foreach ($carsList as $car)
                 <tr>
-                  <td>{{ $car->regno }}</td>
+                  <td>{{ strtoupper($car->regno) }}</td>
                   <td>{{ $car->model }}</td>
                   <td>{{ $car->year }}</td>
                    
@@ -97,7 +97,6 @@
             @else
             There are no cars
             @endif
-          <h5>Work goes here</h5>
         </div>            
     </div><!--close content_item-->
       </div><!--close content-->   
